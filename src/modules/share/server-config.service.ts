@@ -92,4 +92,12 @@ export class ServerConfigService {
     };
   }
 
+  get awsConfig() {
+    return {
+      accessKeyId: this.getString('AWS_ACCESS_KEY_ID'),
+      secretAccessKey: this.getString('AWS_SECRET_ACCESS_KEY'),
+      region: this.getString('AWS_REGION') || 'us-east-1',
+    };
+  }
+
 }

@@ -21,7 +21,8 @@ import { ConfigModule } from '@nestjs/config';
     MessagesModule,
     NotificationModule,
     ContactModule,
-    ShareModule],
+    ShareModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
