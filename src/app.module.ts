@@ -9,6 +9,7 @@ import { NotificationModule } from './modules/notification/notification.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { ShareModule } from './modules/share/share.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -21,7 +22,8 @@ import { ConfigModule } from '@nestjs/config';
     MessagesModule,
     NotificationModule,
     ContactModule,
-    ShareModule
+    ShareModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
