@@ -22,7 +22,16 @@ async function bootstrap(): Promise<NestExpressApplication> {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.use(helmet());
   app.setGlobalPrefix('/api');
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
   app.use(morgan('combined'));
   app.enableVersioning();
   // Microservice config here
