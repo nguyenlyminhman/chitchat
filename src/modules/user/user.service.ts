@@ -1,16 +1,25 @@
-import { Catch, Injectable } from '@nestjs/common';
-import { DynamodbService } from '../dynamodb/dynamodb.service';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User, UserDocument } from 'src/schema/user.schema';
 
 @Injectable()
 export class UserService {
     constructor(
-        readonly dbService: DynamodbService
-    ) { }
+        @InjectModel(User.name) private userModel: Model<UserDocument>
+    ) {}
 
-    async createUser(): Promise<any> {
+    async createUser(users: Partial<User>): Promise<User> {
         try {
-            const result = await this.dbService.putItem('Users', { id:"1", name: "abc", age: 12, email: "abc@gmail.com" });
-            return result;
+            // const user: Partial<User> = {
+            //     name: 'hello',
+            //     age: 10,
+            //     breed: 'yub',
+            //   };
+
+
+            const a = this.userModel.create(users)
+            return a;
         } catch (Error) {
             console.log(Error);
         }
@@ -18,7 +27,7 @@ export class UserService {
 
     async getUserById(): Promise<any> {
         try {
-            const result = await this.dbService.getItem('Users', { id:"1"});
+            const result = null;
             return result;
         } catch (Error) {
             console.log(Error);
@@ -27,7 +36,7 @@ export class UserService {
 
     async updateUserById(): Promise<any> {
         try {
-            const result = await this.dbService.updateItem('Users', "1", { name: "xyz" });
+            const result = null;
             return result;
         } catch (Error) {
             console.log(Error);

@@ -1,15 +1,17 @@
-import { Controller, Get, HttpCode, HttpStatus, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'src/common/response';
+import { CreateUserDto } from './dtos/create.user.dto';
 
 @Controller('user')
 export class UserController {
-    constructor(private userService: UserService) {}
+
+  constructor(private userService: UserService) {}
 
   @Post("/new")
   @HttpCode(HttpStatus.OK)
-  async createUser() {
-    const data = await this.userService.createUser();
+  async createUser(@Body() user: CreateUserDto) {
+    const data = await this.userService.createUser(user);
     return new Response(HttpStatus.OK, "OK, putted", data);
   }
 
