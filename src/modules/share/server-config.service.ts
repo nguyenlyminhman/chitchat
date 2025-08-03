@@ -64,6 +64,12 @@ export class ServerConfigService {
     };
   }
 
+  get dbMongo() {
+    return {
+      uri: this.getString('MONGO_URI'),
+    };
+  }
+
   get dbDefault() {
     return {
       host: this.getString('DB_HOST'),
